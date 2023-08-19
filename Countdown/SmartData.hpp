@@ -1,8 +1,8 @@
+#pragma region 本地化
 #include <fstream>
 #include "json.hpp"
-//using namespace nlohmann;
 
-nlohmann::json configFileJson;
+nlohmann::ordered_json configFileJson;
 int loadFile() {
 	std::ifstream configFile("C:\\Config.json");
 	configFile >> configFileJson;
@@ -15,7 +15,11 @@ int saveFile() {
 	return 0;
 }
 
-#include <stdlib.h>
+#pragma endregion
+
+#pragma region 智能变量(
+
+#include <iostream>
 #include <string>
 template <typename T>
 class SmartData {
@@ -25,11 +29,17 @@ public:
 
 		loadFile();
 
-		data = configFileJson.at(key);
+		//mData = data = configFileJson.at(key);
+
+		if (!configFileJson[key].is_null()) {
+			mData = data = configFileJson[key];
+		}
+
 
 	}
 
 	void set(T _data) {
+		std::cout << "保存" << "\n";
 		if (data != _data) {
 			data = _data;
 
@@ -39,8 +49,15 @@ public:
 		}
 	}
 
-	T data;
+	void check() {
+		if (mData != data) {
+			set(mData);
+		}
+	}
+
+	T mData;
 protected:
-	//T data;
+	T data;
 	std::string key;
 };
+#pragma endregion

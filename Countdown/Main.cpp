@@ -3,13 +3,28 @@
 // If you are new to Dear ImGui, read documentation from the docs/ folder + read the top of imgui.cpp.
 // Read online: https://github.com/ocornut/imgui/tree/master/docs
 
+#pragma region include
 #include "Main.h"
 #include "MainWindow.hpp"
 #include "SettingWindow.hpp"
 #include "ChangeColor.hpp"
-#include "CheckPresence.hpp"
+#include "CheckPresence.hpp"  
+#pragma endregion
+
+void Init() {
+    checkPresence();
+}
+void Update() {
+    noResize.check();
+    noMove.check();
+    noTitle.check();
+    mainWindow();
+    settingWindow();
+    changeColor();//变色
+}
 
 //#pragma comment( linker, "/subsystem:windows /entry:mainCRTStartup" )
+#pragma region 模板
 // Data
 static LPDIRECT3D9              g_pD3D = nullptr;
 static LPDIRECT3DDEVICE9        g_pd3dDevice = nullptr;
@@ -21,15 +36,6 @@ bool CreateDeviceD3D(HWND hWnd);
 void CleanupDeviceD3D();
 void ResetDevice();
 LRESULT WINAPI WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
-
-void Init() {
-    checkPresence();
-}
-void Update() {
-    mainWindow();
-    settingWindow();
-    changeColor();//变色
-}
 
 // Main code
 int main(int, char**)
@@ -294,3 +300,4 @@ LRESULT WINAPI WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
     }
     return ::DefWindowProcW(hWnd, msg, wParam, lParam);
 }
+#pragma endregion

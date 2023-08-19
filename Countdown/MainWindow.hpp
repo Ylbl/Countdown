@@ -20,13 +20,13 @@ void mainWindow() {
 
 	ImGuiWindowFlags flag=0;
 
-	if (noResize.data) {
+	if (noResize.mData) {
 		flag |= ImGuiWindowFlags_NoResize;
 	}
-	if (noMove.data) {
+	if (noMove.mData) {
 		flag |= ImGuiWindowFlags_NoMove;
 	}
-	if (noTitle.data) {
+	if (noTitle.mData) {
 		flag |= ImGuiWindowFlags_NoTitleBar;
 	}
 
@@ -40,7 +40,7 @@ void mainWindow() {
 	ImGui::Text(u8"ÖÐ¿¼"); ImGui::SameLine();
 	ImGui::PopStyleColor();
 	ImGui::PopFont();
-	//ImGui::TextWrapped("NB: Cursor & selection are preserved when refocusing last used item in code.");
+
 	ImGui::Text(u8"  ½öÊ£"); ImGui::SameLine(); HelpMarker(u8"µ½2024/6/14");
 
 	ImGui::Text(string_To_UTF8(getRestTime()).c_str());

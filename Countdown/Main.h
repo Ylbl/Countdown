@@ -17,10 +17,6 @@ extern unsigned short int g = 0;
 extern unsigned short int b = 0;
 
 extern bool isOpenSettingWindow=false;
-//
-//extern bool noResize = false;
-//extern bool noMove = false;
-//extern bool noTitle = false;
 
 SmartData<bool> noResize("noResize");
 SmartData<bool> noMove("noMove");
